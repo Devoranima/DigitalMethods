@@ -18,7 +18,7 @@ def calcBigFunction(arg, n):
 
 def calcMainFunction(x):
   n = 1
-  e = 10**(-4)
+  e = 10 ** (-4)
 
   prev = calcBigFunction(x, n)
   n *= 2
@@ -34,8 +34,8 @@ def main():
   b = 4 
   h = 0.2
   n = (b - a)/.2 + 1
-  x = a
 
+  x = a
   for _ in range (int(n)):
     x = round(x, 1)
     print(x, calcMainFunction(x))
