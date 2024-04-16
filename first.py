@@ -1,16 +1,16 @@
 def calcTaylor(x):
     e = 10**(-6)
-    prev = 1
-    next = 1
+    prev = 0
+    next = -0.25*x
 
-
-    sum = -1
+    sum = 0
     i = 1
+  
     while (abs(next) > e ):
         sum += next
         prev = next
         i += 1
-        next = (-0.5) * x**2 * (i-1) / (i**2*(2*i-1)) * prev
+        next = (-0.5) * x**2 * (i-1) / i**2 / (2*i-1) * prev
     
     return round(sum, 6)  
 
@@ -23,9 +23,9 @@ def main():
     n = (b - a)/.2 + 1
     x = a
 
-    for i in range (int(n)):
-        #calcTaylor(x)
-        print(round(x, 1), calcTaylor(x))
+    for _ in range (int(n)):
+        x = round(x, 1)
+        print(x, calcTaylor(x))
         x += h
 
 
