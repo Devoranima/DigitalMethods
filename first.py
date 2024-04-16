@@ -1,12 +1,18 @@
+import matplotlib.pyplot as plt
+import math
 def calcTaylor(x):
     e = 10**(-6)
     prev = 0
-    next = -0.25*x
+    next = -0.25*(x**2)
 
-    sum = 0
     i = 1
-  
-    while (abs(next) > e ):
+    
+    #y = 0.5772156649
+    #ln = math.log(x)
+    #sum = y + ln
+    sum = 0
+
+    while (abs(next) > e):
         sum += next
         prev = next
         i += 1
@@ -23,10 +29,16 @@ def main():
     n = (b - a)/.2 + 1
     x = a
 
+    X = []
+    F = []
     for _ in range (int(n)):
         x = round(x, 1)
-        print(x, calcTaylor(x))
+        X.append(x)
+        F.append(calcTaylor(x))
         x += h
+    
+    plt.plot(X, F,  '-ok')
+    plt.show()
 
 
 if __name__ == "__main__":

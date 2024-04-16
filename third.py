@@ -1,7 +1,8 @@
 import math
+import matplotlib.pyplot as plt
 
 def calcSmallFunction(x):
-  if x != 0: return (math.cos(x) - 1)/x
+  return (math.cos(x) - 1)/x
 
 
 def calcBigFunction(arg, n):
@@ -36,10 +37,16 @@ def main():
   n = (b - a)/.2 + 1
 
   x = a
+
+  X = []
+  F = []
   for _ in range (int(n)):
     x = round(x, 1)
-    print(x, calcMainFunction(x))
+    X.append(x)
+    F.append(calcMainFunction(x))
     x += h
+  plt.plot(X, F, '-ok')
+  plt.show()
 
 
 if __name__ == "__main__":
