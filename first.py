@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import math
+from scipy.special import sici
+
 def calcTaylor(x):
     e = 10**(-6)
     prev = 0
@@ -7,10 +9,13 @@ def calcTaylor(x):
 
     i = 1
     
+    sum = 0
+
+
     #y = 0.5772156649
     #ln = math.log(x)
-    #sum = y + ln
-    sum = 0
+    #sum += y + ln
+    
 
     while (abs(next) > e):
         sum += next
@@ -31,13 +36,18 @@ def main():
 
     X = []
     F = []
+    C = []
     for _ in range (int(n)):
         x = round(x, 1)
         X.append(x)
         F.append(calcTaylor(x))
+        #_, ci = sici(x)
+        #C.append(ci)
         x += h
     
-    plt.plot(X, F,  '-ok')
+    fig, ax = plt.subplots()
+    ax.plot(X, F,  '-ok', label='MyCi(x)')
+    #ax.plot(X, C, '--', label='Ci(x)')
     plt.show()
 
 
