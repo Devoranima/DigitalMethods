@@ -1,11 +1,2 @@
-pyvenv.cfg
-Scripts/
-Lib/
-Include/
-share/
-__pycache__
-bin/
-include/
-lib/
-lib64/
-
+.git/
+.venv/
