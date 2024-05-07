@@ -1,6 +1,6 @@
 import math
 import matplotlib.pyplot as plt
-
+from scipy.special import sici
 
 
 def calcSmallFunction(x):
@@ -58,8 +58,8 @@ class calculateFunction():
 
 
     def calcSimpson(x0, delta, n):
-        sum = calculateFunction.calcTrapezoid(x0, delta, n) / 3
-        sum += 2/3*delta*n*calcSmallFunction(delta/2)
+        sum = calculateFunction.calcTrapezoid(x0, delta, n)
+        sum += 2*delta*n*calcSmallFunction(delta/2)
         return sum        
 
 
@@ -90,8 +90,7 @@ class calculateFunction():
         calcGauss
     )   
 
-def calcMainFunction(x):
-    num = 5
+def calcMainFunction(x, num):
     n = 1
     e = 10 ** (-4)
     
@@ -102,9 +101,11 @@ def calcMainFunction(x):
         prev = next
         n *= 2
         next = calculateFunction.calcBigFunction(x, n, num)
-    return round(prev, 4)
+    return [round(prev, 4), n]
 
-def main():
+
+
+def old_main():
   a = 0.4
   b = 4 
   h = 0.2
@@ -123,5 +124,47 @@ def main():
   plt.show()
 
 
+def printTable(X, F, N, C, n):
+    for i in range(n):
+        err = C[i] - F[i]
+        print(f"{X[i]} | {F[i]} | {N[i]} | {err}" )
+    print('\n')
+
+def main():
+    a = 0.4
+    b = 4
+    h = 0.2
+    n = int((b-a)/.2 + 1)
+    x = a
+    X = []
+    F = []
+    C = []
+    N = []
+    for _ in range(n): 
+        x = round(x, 1)
+        X.append(x)
+
+        y = 0.5772156649
+        ln = math.log(x)
+        ci = sici(x)[1] - y - ln       
+        C.append(ci)
+
+        x += h
+
+
+    for i in range(6):
+        f = []
+        NSMALL = []
+        for j in range(n):
+            val, nsmall = calcMainFunction(X[j], i)
+            f.append(val)
+            NSMALL.append(nsmall)
+        N.append(NSMALL)
+        F.append(f)
+
+    
+    for i in range(6):
+        printTable(X, F[i], N[i], C, n)
+    
 if __name__ == "__main__":
     main()
